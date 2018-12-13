@@ -1,17 +1,16 @@
 package br.edu.ufcg.ccc.pharma.user;
 
 import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
+import br.edu.ufcg.ccc.pharma.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
-
 @Entity
 @Table(name = "user")
 public class User extends AbstractEntity {
@@ -26,7 +25,7 @@ public class User extends AbstractEntity {
 
     @Email(message = "'email' field not valid")
     @NotEmpty(message = "'email' field may not be empty")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotEmpty(message = "'password' field may not be empty")
@@ -34,38 +33,17 @@ public class User extends AbstractEntity {
     @JsonIgnore
     private String password;
 
-    @Column(name = "admin")
-    @NotEmpty
-    private boolean admin;
-
-    @Column(name = "active")
-    private int active;
+    @NotEmpty(message = "'role' field may not be empty")
+    private String role;
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, String password, boolean admin, int active) {
+    public User(String firstName, String lastName, String email, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.admin = admin;
-        this.active = active;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -98,5 +76,13 @@ public class User extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

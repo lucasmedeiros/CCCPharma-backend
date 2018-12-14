@@ -19,6 +19,14 @@ public class Product extends AbstractEntity {
     @OneToOne
     private Category category;
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public Product(@NotEmpty String name, String producer, String barcode, double price, int amount, boolean available, Category category) {
         this.name = name;
         this.producer = producer;

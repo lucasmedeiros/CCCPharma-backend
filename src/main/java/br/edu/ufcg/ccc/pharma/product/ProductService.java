@@ -1,5 +1,6 @@
 package br.edu.ufcg.ccc.pharma.product;
 
+import br.edu.ufcg.ccc.pharma.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,11 @@ public class ProductService {
     public Product update(long id, Product product) {
         product.setId(id);
         return productDAO.save(product);
+    }
+
+    public Product getProduct(Long id) {
+        return this.productDAO
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
 }

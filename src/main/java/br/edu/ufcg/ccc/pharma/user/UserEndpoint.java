@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserEndpoint {
 
     private final UserService userService;
@@ -26,7 +26,7 @@ public class UserEndpoint {
         return new ResponseEntity<>(this.userService.findAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/find/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<?> getPersonById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
     }

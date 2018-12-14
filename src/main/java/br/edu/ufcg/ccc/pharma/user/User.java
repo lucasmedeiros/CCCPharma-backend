@@ -1,14 +1,12 @@
 package br.edu.ufcg.ccc.pharma.user;
 
 import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
-import br.edu.ufcg.ccc.pharma.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Entity
@@ -25,11 +23,12 @@ public class User extends AbstractEntity {
 
     @Email(message = "'email' field not valid")
     @NotEmpty(message = "'email' field may not be empty")
-    @Column(unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @NotEmpty(message = "'password' field may not be empty")
     @Length(min = 6, message = "your password must have at least 6 characters")
+    @Column(name = "password")
     @JsonIgnore
     private String password;
 

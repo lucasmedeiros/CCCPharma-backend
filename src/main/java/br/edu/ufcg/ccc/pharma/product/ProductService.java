@@ -15,7 +15,12 @@ public class ProductService {
         this.productDAO = productDAO;
     }
 
-    public Product save(Product product) { return productDAO.save(product); }
+    public Product save(Product product) {
+        boolean isAvaliable = product.getAmount() > 0;
+        product.setAvailable(isAvaliable);
+        return productDAO.save(product);
+    }
+
     public void delete(long id) { productDAO.deleteById(id);}
     public Product findById(long id) {
         Product product = null;

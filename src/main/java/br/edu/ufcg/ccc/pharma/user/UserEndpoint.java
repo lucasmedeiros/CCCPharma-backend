@@ -31,7 +31,7 @@ public class UserEndpoint {
         return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(path = "/sign-up")
     @Transactional
     public ResponseEntity<?> save(@Valid @RequestBody User user) {
         return new ResponseEntity<>(this.userService.save(user), HttpStatus.CREATED);
@@ -44,7 +44,7 @@ public class UserEndpoint {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping
+    @PutMapping(path = "/sign-up")
     public ResponseEntity<?> update(@RequestBody User user) {
         return new ResponseEntity<>(this.userService.save(user), HttpStatus.NO_CONTENT);
     }

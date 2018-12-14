@@ -1,7 +1,6 @@
-package br.edu.ufcg.ccc.pharma.endpoint;
+package br.edu.ufcg.ccc.pharma.user;
 
 import br.edu.ufcg.ccc.pharma.security.JwtGenerator;
-import br.edu.ufcg.ccc.pharma.model.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

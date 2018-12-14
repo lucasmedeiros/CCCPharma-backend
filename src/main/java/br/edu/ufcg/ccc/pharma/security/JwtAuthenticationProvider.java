@@ -1,8 +1,8 @@
 package br.edu.ufcg.ccc.pharma.security;
 
 import br.edu.ufcg.ccc.pharma.model.JwtAuthenticationToken;
-import br.edu.ufcg.ccc.pharma.model.MyUserDetails;
-import br.edu.ufcg.ccc.pharma.model.User;
+import br.edu.ufcg.ccc.pharma.user.MyUserDetails;
+import br.edu.ufcg.ccc.pharma.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;

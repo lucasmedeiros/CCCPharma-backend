@@ -1,8 +1,6 @@
-package br.edu.ufcg.ccc.pharma.service;
+package br.edu.ufcg.ccc.pharma.user;
 
 import br.edu.ufcg.ccc.pharma.exceptions.ResourceNotFoundException;
-import br.edu.ufcg.ccc.pharma.model.User;
-import br.edu.ufcg.ccc.pharma.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@SuppressWarnings("WeakerAccess")
 @Service("userService")
 public class UserService {
 

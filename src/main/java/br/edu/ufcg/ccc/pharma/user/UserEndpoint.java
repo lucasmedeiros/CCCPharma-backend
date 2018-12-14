@@ -1,7 +1,5 @@
-package br.edu.ufcg.ccc.pharma.endpoint;
+package br.edu.ufcg.ccc.pharma.user;
 
-import br.edu.ufcg.ccc.pharma.model.User;
-import br.edu.ufcg.ccc.pharma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

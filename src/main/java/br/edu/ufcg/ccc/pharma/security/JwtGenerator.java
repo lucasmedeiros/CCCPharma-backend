@@ -1,6 +1,6 @@
 package br.edu.ufcg.ccc.pharma.security;
 
-import br.edu.ufcg.ccc.pharma.model.User;
+import br.edu.ufcg.ccc.pharma.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

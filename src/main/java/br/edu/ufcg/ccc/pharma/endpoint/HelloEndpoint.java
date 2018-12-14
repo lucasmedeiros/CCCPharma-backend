@@ -10,6 +10,6 @@ public class HelloEndpoint {
 
     @GetMapping
     public String hello() {
-        return "Hello World, I'm testing SpringBoot =)";
+        return "Testing SpringBoot JWT authorisation";
     }
 }

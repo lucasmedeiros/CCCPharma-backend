@@ -1,4 +1,4 @@
-package br.edu.ufcg.ccc.pharma.user;
+package br.edu.ufcg.ccc.pharma.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

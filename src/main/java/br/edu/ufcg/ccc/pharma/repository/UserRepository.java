@@ -1,6 +1,7 @@
-package br.edu.ufcg.ccc.pharma.user;
+package br.edu.ufcg.ccc.pharma.repository;
 
 
+import br.edu.ufcg.ccc.pharma.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

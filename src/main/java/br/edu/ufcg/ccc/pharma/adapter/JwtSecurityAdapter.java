@@ -2,7 +2,7 @@ package br.edu.ufcg.ccc.pharma.adapter;
 
 import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationEntryPoint;
 import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationProvider;
-import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationTokenFilter;
+import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationFilter;
 import br.edu.ufcg.ccc.pharma.security.JwtSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,10 +23,14 @@ import java.util.Collections;
 @Configuration
 public class JwtSecurityAdapter extends WebSecurityConfigurerAdapter {
 
+    private final JwtAuthenticationProvider authenticationProvider;
+    private final JwtAuthenticationEntryPoint entryPoint;
+
     @Autowired
-    private JwtAuthenticationProvider authenticationProvider;
-    @Autowired
-    private JwtAuthenticationEntryPoint entryPoint;
+    public JwtSecurityAdapter(JwtAuthenticationProvider authenticationProvider, JwtAuthenticationEntryPoint entryPoint) {
+        this.authenticationProvider = authenticationProvider;
+        this.entryPoint = entryPoint;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager() {
@@ -34,9 +38,8 @@ public class JwtSecurityAdapter extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JwtAuthenticationTokenFilter authenticationTokenFilter() {
-
-        JwtAuthenticationTokenFilter filter = new JwtAuthenticationTokenFilter();
+    public JwtAuthenticationFilter authenticationTokenFilter() {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter();
         filter.setAuthenticationManager(authenticationManager());
         filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
 
@@ -45,9 +48,6 @@ public class JwtSecurityAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        System.out.println("IAUBDSDVJDSBVJHSDBSDJH");
-
         http.csrf().disable()
                 .authorizeRequests().antMatchers("**/rest/**").authenticated()
                 .and()
@@ -56,7 +56,6 @@ public class JwtSecurityAdapter extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
         http.headers().cacheControl();
     }
 }

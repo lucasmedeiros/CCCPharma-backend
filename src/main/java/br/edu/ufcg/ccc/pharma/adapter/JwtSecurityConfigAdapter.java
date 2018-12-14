@@ -1,5 +1,10 @@
-package br.edu.ufcg.ccc.pharma.security;
+package br.edu.ufcg.ccc.pharma.adapter;
 
+import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationEntryPoint;
+import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationProvider;
+import br.edu.ufcg.ccc.pharma.security.JwtAuthenticationTokenFilter;
+import br.edu.ufcg.ccc.pharma.security.JwtSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,9 +21,11 @@ import java.util.Collections;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 @Configuration
-public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
+public class JwtSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
+    @Autowired
     private JwtAuthenticationProvider authenticationProvider;
+    @Autowired
     private JwtAuthenticationEntryPoint entryPoint;
 
     @Bean
@@ -39,8 +46,10 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        System.out.println("IAUBDSDVJDSBVJHSDBSDJH");
+
         http.csrf().disable()
-                .authorizeRequests().antMatchers("**/rest").authenticated()
+                .authorizeRequests().antMatchers("**/rest/**").authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()

@@ -85,4 +85,8 @@ public class User extends AbstractEntity {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public boolean isAdmin() {
+        return this.getRole().toLowerCase().equals("admin");
+    }
 }

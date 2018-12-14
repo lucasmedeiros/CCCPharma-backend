@@ -13,7 +13,6 @@ public class Product extends AbstractEntity {
     private String name;
     private String producer;
     private String barcode;
-    @NotEmpty
     private double price;
     private boolean available = true;
     @OneToOne
@@ -21,7 +20,7 @@ public class Product extends AbstractEntity {
 
     public Product() {}
 
-    public Product(@NotEmpty String name, String producer, String barcode, @NotEmpty double price, boolean available, Category category) {
+    public Product(@NotEmpty String name, String producer, String barcode, double price, boolean available, Category category) {
         this.name = name;
         this.producer = producer;
         this.barcode = barcode;

@@ -5,6 +5,7 @@ import br.edu.ufcg.ccc.pharma.category.Category;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -85,5 +86,9 @@ public class Product extends AbstractEntity {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public double getPriceWithDiscount() {
+        return this.getPrice() * (1 - this.getCategory().getDiscount());
     }
 }

@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserEndpoint {
 
     private final UserService userService;
@@ -26,12 +26,12 @@ public class UserEndpoint {
         return new ResponseEntity<>(this.userService.findAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/find/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<?> getPersonById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/sign-up")
+    @PostMapping
     @Transactional
     public ResponseEntity<?> save(@Valid @RequestBody User user) {
         return new ResponseEntity<>(this.userService.save(user), HttpStatus.CREATED);
@@ -44,7 +44,7 @@ public class UserEndpoint {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(path = "/sign-up")
+    @PutMapping
     public ResponseEntity<?> update(@RequestBody User user) {
         return new ResponseEntity<>(this.userService.save(user), HttpStatus.NO_CONTENT);
     }

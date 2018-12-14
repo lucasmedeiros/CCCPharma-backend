@@ -14,20 +14,22 @@ public class Product extends AbstractEntity {
     private String producer;
     private String barcode;
     private double price;
+    private int amount;
     private boolean available = true;
     @OneToOne
     private Category category;
 
-    public Product() {}
-
-    public Product(@NotEmpty String name, String producer, String barcode, double price, boolean available, Category category) {
+    public Product(@NotEmpty String name, String producer, String barcode, double price, int amount, boolean available, Category category) {
         this.name = name;
         this.producer = producer;
         this.barcode = barcode;
         this.price = price;
+        this.amount = amount;
         this.available = available;
         this.category = category;
     }
+
+    public Product() {}
 
     public String getName() {
         return name;

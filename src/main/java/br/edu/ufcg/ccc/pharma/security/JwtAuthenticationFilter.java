@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
+public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    public JwtAuthenticationTokenFilter() {
+    public JwtAuthenticationFilter() {
         super("**/rest/**");
     }
 

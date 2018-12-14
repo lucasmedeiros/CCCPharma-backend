@@ -17,8 +17,12 @@ import java.util.List;
 @Component
 public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
+    private final JwtValidator validator;
+
     @Autowired
-    private JwtValidator validator;
+    public JwtAuthenticationProvider(JwtValidator validator) {
+        this.validator = validator;
+    }
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {

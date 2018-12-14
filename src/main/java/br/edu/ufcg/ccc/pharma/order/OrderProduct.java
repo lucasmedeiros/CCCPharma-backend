@@ -1,52 +1,37 @@
 package br.edu.ufcg.ccc.pharma.order;
 
+import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
 import br.edu.ufcg.ccc.pharma.product.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Entity
-public class OrderProduct {
+public class OrderProduct extends AbstractEntity {
 
-    @EmbeddedId
-    @JsonIgnore
-    private OrderProductPK pk;
+    @ManyToOne
+    private Product product;
 
     @Column
     private Integer quantity;
 
     public OrderProduct() { }
 
-    public OrderProduct(Order order, Product product, Integer quantity) {
-        this.pk = new OrderProductPK();
-
-        this.pk.setOrder(order);
-        this.pk.setProduct(product);
+    public OrderProduct(Product product, Integer quantity) {
+        this.product = product;
 
         this.quantity = quantity;
     }
 
-    @Transient
     public Product getProduct() {
-        return this.pk.getProduct();
+        return this.product;
     }
 
-    @Transient
     public Double getTotalPrice() {
         return getProduct().getPrice() * getQuantity();
-    }
-
-    public OrderProductPK getPk() {
-        return pk;
-    }
-
-    public void setPk(OrderProductPK pk) {
-        this.pk = pk;
     }
 
     public Integer getQuantity() {
@@ -62,12 +47,12 @@ public class OrderProduct {
         if (this == o) return true;
         if (!(o instanceof OrderProduct)) return false;
         OrderProduct that = (OrderProduct) o;
-        return Objects.equals(getPk(), that.getPk()) &&
+        return Objects.equals(getProduct(), that.getProduct()) &&
                 Objects.equals(getQuantity(), that.getQuantity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPk(), getQuantity());
+        return Objects.hash(getProduct(), getQuantity());
     }
 }

@@ -16,7 +16,7 @@ public class OrderProductService {
         this.orderProductRepository = orderProductRepository;
     }
 
-    public OrderProduct create(OrderProduct orderProduct) {
+    public OrderProduct save(OrderProduct orderProduct) {
         return this.orderProductRepository.save(orderProduct);
     }
 }

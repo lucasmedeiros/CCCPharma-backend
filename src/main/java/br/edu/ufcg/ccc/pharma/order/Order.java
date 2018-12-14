@@ -16,7 +16,6 @@ import java.util.List;
 @Table(name = "orders")
 public class Order extends AbstractEntity {
 
-    @NotEmpty(message = "'price' field may not be empty")
     @Column(name = "price", nullable = false)
     private Double price;
 
@@ -24,26 +23,16 @@ public class Order extends AbstractEntity {
     private LocalDate dateCreated;
 
     @JsonManagedReference
-    @NotEmpty(message = "you need to have at least one product to order")
-    @OneToMany(mappedBy = "pk.order")
+    @OneToMany
     @Valid
-    private List<OrderProduct> orderProducts = new ArrayList<>();
+    private List<OrderProduct> orderProducts;
 
     public Order() {
-
+        this.orderProducts = new ArrayList<>();
     }
 
-    @Transient
-    public Double getTotalOrderPrice() {
-        double sum = 0D;
-
-        List<OrderProduct> orderProducts = getOrderProducts();
-
-        for (OrderProduct op : orderProducts) {
-            sum += op.getTotalPrice();
-        }
-
-        return sum;
+    public void addOrderProduct(OrderProduct item) {
+        this.orderProducts.add(item);
     }
 
     @Transient

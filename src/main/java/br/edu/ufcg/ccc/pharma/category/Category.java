@@ -1,4 +1,6 @@
-package br.edu.ufcg.ccc.pharma.model;
+package br.edu.ufcg.ccc.pharma.category;
+
+import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;

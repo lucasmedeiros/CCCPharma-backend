@@ -1,11 +1,14 @@
-package br.edu.ufcg.ccc.pharma.model;
+package br.edu.ufcg.ccc.pharma.product;
+
+import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
+import br.edu.ufcg.ccc.pharma.category.Category;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Product extends AbstractEntity{
+public class Product extends AbstractEntity {
     @NotEmpty
     private String name;
     private String producer;

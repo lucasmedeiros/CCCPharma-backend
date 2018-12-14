@@ -1,7 +1,7 @@
 package br.edu.ufcg.ccc.pharma.security;
 
 import br.edu.ufcg.ccc.pharma.model.JwtAuthenticationToken;
-import br.edu.ufcg.ccc.pharma.user.JwtUserDetails;
+import br.edu.ufcg.ccc.pharma.user.MyUserDetails;
 import br.edu.ufcg.ccc.pharma.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +40,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(user.getRole());
 
-        return new JwtUserDetails(user.getEmail(), user.getId(),
+        return new MyUserDetails(user.getEmail(), user.getId(),
                 token, grantedAuthorities);
     }
 

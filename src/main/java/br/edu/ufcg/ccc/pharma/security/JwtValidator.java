@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("WeakerAccess")
 @Component
 public class JwtValidator {
 
@@ -22,11 +23,15 @@ public class JwtValidator {
 
             user = new User();
 
-            user.setEmail(body.getSubject());
             user.setId(Long.parseLong(body.getId()));
+            user.setEmail(body.getSubject());
+            user.setFirstName(body.get("firstName").toString());
+            user.setLastName(body.get("lastName").toString());
+            user.setPassword(body.get("password").toString());
             user.setRole(body.get("role").toString());
+
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
         return user;

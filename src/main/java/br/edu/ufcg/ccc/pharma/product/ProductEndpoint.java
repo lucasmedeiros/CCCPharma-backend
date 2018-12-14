@@ -26,6 +26,11 @@ public class ProductEndpoint {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Product product) { return new ResponseEntity<>(service.save(product), HttpStatus.CREATED); }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable long id, @RequestBody Product product) {
+        return new ResponseEntity<>(service.update(id, product), HttpStatus.OK);
+    }
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable long id) {
         service.delete(id);

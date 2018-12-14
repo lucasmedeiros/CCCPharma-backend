@@ -3,7 +3,6 @@ package br.edu.ufcg.ccc.pharma.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +25,9 @@ public class ProductService {
         return product;
     }
     public List<Product> findAll() { return (List<Product>) productDAO.findAll(); }
+
+    public Product update(long id, Product product) {
+        product.setId(id);
+        return productDAO.save(product);
+    }
 }

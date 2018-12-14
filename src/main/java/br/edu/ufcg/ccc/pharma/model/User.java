@@ -1,35 +1,35 @@
-package br.edu.ufcg.ccc.pharma.user;
+package br.edu.ufcg.ccc.pharma.model;
 
-import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
-import br.edu.ufcg.ccc.pharma.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings({"unused"})
 @Entity
 @Table(name = "user")
 public class User extends AbstractEntity {
 
     @NotEmpty(message = "'first name' field may not be empty")
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @NotEmpty(message = "'last name' field may not be empty")
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Email(message = "'email' field not valid")
     @NotEmpty(message = "'email' field may not be empty")
-    @Column(unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @NotEmpty(message = "'password' field may not be empty")
     @Length(min = 6, message = "your password must have at least 6 characters")
+    @Column(name = "password", nullable = false)
     @JsonIgnore
     private String password;
 

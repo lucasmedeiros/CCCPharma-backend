@@ -1,8 +1,8 @@
 package br.edu.ufcg.ccc.pharma.security;
 
 import br.edu.ufcg.ccc.pharma.model.JwtAuthenticationToken;
-import br.edu.ufcg.ccc.pharma.user.MyUserDetails;
-import br.edu.ufcg.ccc.pharma.user.User;
+import br.edu.ufcg.ccc.pharma.model.MyUserDetails;
+import br.edu.ufcg.ccc.pharma.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
@@ -17,8 +17,12 @@ import java.util.List;
 @Component
 public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
+    private final JwtValidator validator;
+
     @Autowired
-    private JwtValidator validator;
+    public JwtAuthenticationProvider(JwtValidator validator) {
+        this.validator = validator;
+    }
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {

@@ -15,14 +15,6 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "user")
 public class User extends AbstractEntity {
 
-    @NotEmpty(message = "'first name' field may not be empty")
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @NotEmpty(message = "'last name' field may not be empty")
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-
     @Email(message = "'email' field not valid")
     @NotEmpty(message = "'email' field may not be empty")
     @Column(name = "email", unique = true, nullable = false)
@@ -39,28 +31,10 @@ public class User extends AbstractEntity {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, String password, String role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String email, String password, String role) {
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getEmail() {

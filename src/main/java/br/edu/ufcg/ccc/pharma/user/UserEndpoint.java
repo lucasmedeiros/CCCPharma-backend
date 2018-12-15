@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserEndpoint {
 
     private final UserService userService;

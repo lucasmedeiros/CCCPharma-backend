@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 
 @SuppressWarnings({"unused"})
 @Entity
-@Table(name = "user")
+@Table(name = "table_user")
 public class User extends AbstractEntity {
 
     @Email(message = "'email' field not valid")

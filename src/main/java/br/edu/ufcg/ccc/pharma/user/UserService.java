@@ -32,9 +32,9 @@ public class UserService {
         User user = this.userRepository.findByEmail(email);
 
         if (user == null)
-            throw new ResourceNotFoundException("User not found for email" + email);
+            throw new ResourceNotFoundException("User not found for email " + email);
 
-        if (!encoder.encode(password).equals(user.getPassword()))
+        if (!this.encoder.matches(password, user.getPassword()))
             throw new IllegalArgumentException("Email/password incorrect(s)");
 
         return user;

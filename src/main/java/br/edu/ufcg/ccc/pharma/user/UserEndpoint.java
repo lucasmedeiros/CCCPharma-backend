@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -22,7 +20,9 @@ public class UserEndpoint {
     }
 
     @GetMapping
-    public ResponseEntity<?> listAll(Pageable pageable) {
+    public ResponseEntity<?> listAll(Pageable pageable,
+                                     @AuthenticationPrincipal UserDetails userDetails) {
+        System.out.println(userDetails);
         return new ResponseEntity<>(this.userService.findAll(pageable), HttpStatus.OK);
     }
 
@@ -31,21 +31,9 @@ public class UserEndpoint {
         return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/sign-up")
-    @Transactional
-    public ResponseEntity<?> save(@Valid @RequestBody User user) {
-        return new ResponseEntity<>(this.userService.save(user), HttpStatus.CREATED);
-    }
-
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         this.userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @PutMapping(path = "/sign-up")
-    public ResponseEntity<?> update(@RequestBody User user) {
-        return new ResponseEntity<>(this.userService.save(user), HttpStatus.NO_CONTENT);
     }
 }

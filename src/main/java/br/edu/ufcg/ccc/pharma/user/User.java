@@ -23,10 +23,8 @@ public class User extends AbstractEntity {
     @NotEmpty(message = "'password' field may not be empty")
     @Length(min = 6, message = "your password must have at least 6 characters")
     @Column(name = "password", nullable = false)
-    @JsonIgnore
     private String password;
 
-    @NotEmpty(message = "'role' field may not be empty")
     private String role;
 
     public User() {}
@@ -62,6 +60,6 @@ public class User extends AbstractEntity {
     }
 
     public boolean isAdmin() {
-        return this.getRole().toLowerCase().equals("admin");
+        return this.getRole().toUpperCase().equals("ADMIN");
     }
 }

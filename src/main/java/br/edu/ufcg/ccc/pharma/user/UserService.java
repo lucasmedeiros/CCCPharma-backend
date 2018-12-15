@@ -24,7 +24,20 @@ public class UserService {
 
     public User save(User user) {
         user.setPassword(this.encoder.encode(user.getPassword()));
+        user.setRole(user.getRole().toUpperCase());
         return this.userRepository.save(user);
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        User user = this.userRepository.findByEmail(email);
+
+        if (user == null)
+            throw new ResourceNotFoundException("User not found for email" + email);
+
+        if (!encoder.encode(password).equals(user.getPassword()))
+            throw new IllegalArgumentException("Email/password incorrect(s)");
+
+        return user;
     }
 
     public Page<User> findAll(Pageable pageable) {

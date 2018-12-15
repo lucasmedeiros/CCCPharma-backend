@@ -20,9 +20,12 @@ public class CategoryEndpoint {
         return new ResponseEntity(dao.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<?> save(@RequestBody Category category) {
-        if (category == null) return new ResponseEntity(HttpStatus.NOT_FOUND);
-        return new ResponseEntity(dao.save(category), HttpStatus.CREATED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> save(@PathVariable long id, @RequestBody Category category) {
+        if (category == null || !dao.existsById(id)) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        category.setId(id);
+        return new ResponseEntity(dao.save(category), HttpStatus.OK);
     }
 }

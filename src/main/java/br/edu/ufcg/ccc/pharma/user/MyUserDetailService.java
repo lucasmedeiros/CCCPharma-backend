@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,14 +23,14 @@ public class MyUserDetailService implements UserDetailsService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = Optional.ofNullable(this.userRepository.findByEmail(username))
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found for email: " + username));
 
         List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("CLIENT", "ADMIN");
         List<GrantedAuthority> authorityListClient = AuthorityUtils.createAuthorityList("CLIENT");
-
-        System.out.println("TESTANDO SE EH ADMIN: " + user.isAdmin());
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 user.isAdmin() ? authorityListAdmin : authorityListClient);

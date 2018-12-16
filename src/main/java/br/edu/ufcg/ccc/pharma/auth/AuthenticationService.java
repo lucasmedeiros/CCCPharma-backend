@@ -1,4 +1,4 @@
-package br.edu.ufcg.ccc.pharma.security;
+package br.edu.ufcg.ccc.pharma.auth;
 
 import br.edu.ufcg.ccc.pharma.user.User;
 import br.edu.ufcg.ccc.pharma.user.UserService;
@@ -15,10 +15,7 @@ public class AuthenticationService {
         this.userService = userService;
     }
 
-    public User signup(User user) {
-
-        user.setRole("CLIENT");
-
+    public User signUp(User user) {
         return this.userService.save(user);
     }
 

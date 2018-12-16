@@ -24,12 +24,16 @@ public class UserService {
 
     public User save(User user) {
         user.setPassword(this.encoder.encode(user.getPassword()));
-        user.setRole(user.getRole().toUpperCase());
+        user.setRole("CLIENT");
         return this.userRepository.save(user);
     }
 
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
     public User findByEmailAndPassword(String email, String password) {
-        User user = this.userRepository.findByEmail(email);
+        User user = this.findByEmail(email);
 
         if (user == null)
             throw new ResourceNotFoundException("User not found for email " + email);

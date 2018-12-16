@@ -1,7 +1,6 @@
 package br.edu.ufcg.ccc.pharma.user;
 
 import br.edu.ufcg.ccc.pharma.model.AbstractEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;

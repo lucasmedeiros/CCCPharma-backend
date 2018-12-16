@@ -72,8 +72,11 @@ public class OrderService {
 
     private void addToOrder(Product product, int quantity, Double price, Order order) {
 
-        if (quantity <= 0)
+        if (!product.isAvailable())
             throw new IllegalArgumentException("Product " + product.getName() + " not available!");
+
+        if (quantity <= 0)
+            throw new IllegalArgumentException("Illegal value for quantity: " + quantity);
 
         if (quantity > product.getAmount())
             throw new IllegalArgumentException("Amount of " + product.getName() + " out of stock!");

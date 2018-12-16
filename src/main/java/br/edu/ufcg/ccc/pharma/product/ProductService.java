@@ -34,7 +34,7 @@ public class ProductService {
 
     public Product update(long id, Product product) {
         product.setId(id);
-        return productDAO.save(product);
+        return save(product);
     }
 
     public Product getProduct(Long id) {

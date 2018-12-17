@@ -3,7 +3,6 @@ package br.edu.ufcg.ccc.pharma.order;
 import br.edu.ufcg.ccc.pharma.exceptions.ResourceNotFoundException;
 import br.edu.ufcg.ccc.pharma.product.Product;
 import br.edu.ufcg.ccc.pharma.product.ProductService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;

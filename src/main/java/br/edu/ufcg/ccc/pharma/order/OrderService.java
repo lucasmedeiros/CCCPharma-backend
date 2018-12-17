@@ -67,10 +67,15 @@ public class OrderService {
             int quantity = 0;
             double price = 0D;
 
-            for (OrderProduct orderProduct : this.orderProductService.findAll()) {
-                if (product.getId() == orderProduct.getProduct().getId()) {
-                    quantity += orderProduct.getQuantity();
-                    price += orderProduct.getTotalPrice();
+            List<Order> orders = this.orderRepository.findAll();
+
+            for (Order order : orders) {
+
+                for (OrderProduct orderProduct : order.getOrderProducts()) {
+                    if (product.getId() == orderProduct.getProduct().getId()) {
+                        quantity += orderProduct.getQuantity();
+                        price += orderProduct.getTotalPrice();
+                    }
                 }
             }
 

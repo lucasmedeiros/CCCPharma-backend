@@ -3,11 +3,13 @@ package br.edu.ufcg.ccc.pharma.order;
 import br.edu.ufcg.ccc.pharma.exceptions.ResourceNotFoundException;
 import br.edu.ufcg.ccc.pharma.product.Product;
 import br.edu.ufcg.ccc.pharma.product.ProductService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -56,6 +58,30 @@ public class OrderService {
         this.adjustQuantityProductsWhenDeleted(orderToBeDeleted.getOrderProducts());
 
         this.orderRepository.delete(orderToBeDeleted);
+    }
+
+    public List<OrderInformation> getInformation() {
+
+        List<OrderInformation> out = new ArrayList<>();
+
+        for (Product product : this.productService.findAll()) {
+            int quantity = 0;
+            double price = 0D;
+
+            for (OrderProduct orderProduct : this.orderProductService.findAll()) {
+                if (product.getId() == orderProduct.getProduct().getId()) {
+                    quantity += orderProduct.getQuantity();
+                    price += orderProduct.getTotalPrice();
+                }
+            }
+
+            if (quantity > 0) {
+                OrderInformation information = new OrderInformation(product, quantity, price);
+                out.add(information);
+            }
+        }
+
+        return out;
     }
 
     private void makeOrder(List<OrderProductDto> request, Order order) {

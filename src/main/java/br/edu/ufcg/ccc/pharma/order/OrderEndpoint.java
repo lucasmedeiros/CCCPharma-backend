@@ -28,6 +28,11 @@ public class OrderEndpoint {
         return new ResponseEntity<>(this.orderService.findById(id), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/info")
+    public ResponseEntity<?> getOrdersInfo() {
+        return new ResponseEntity<>(this.orderService.getInformation(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody List<OrderProductDto> request) {
         return new ResponseEntity<>(this.orderService.create(request), HttpStatus.CREATED);
